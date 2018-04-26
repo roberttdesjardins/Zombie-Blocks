@@ -98,6 +98,6 @@ public class EnemyHealth : MonoBehaviour {
 		//ScoreManager.score += scoreValue;
 
 		// After 2 seconds destory the enemy.
-		Destroy (gameObject, 2f);
+		Destroy (gameObject, 3f);
 	}
 }
