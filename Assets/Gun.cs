@@ -5,7 +5,8 @@ public class Gun : MonoBehaviour {
 	public int damagePerShot = 10;
 	public float timeBetweenBullets = 0.15f;
 	public float range = 200f;
-	public ParticleSystem muzzleFlash;  
+	public ParticleSystem muzzleFlash; 
+	public GameObject impactEffect;
 
 	public Camera fpsCam;
 
@@ -94,6 +95,9 @@ public class Gun : MonoBehaviour {
 				// ... the enemy should take damage.
 				enemyHealth.TakeDamage (damagePerShot, shootHit.point);
 			}
+
+			GameObject impactGameObject = Instantiate (impactEffect, shootHit.point, Quaternion.LookRotation(shootHit.normal));
+			Destroy (impactGameObject, 2f);
 		}
 	}
 }
