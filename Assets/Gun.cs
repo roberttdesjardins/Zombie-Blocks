@@ -5,6 +5,7 @@ public class Gun : MonoBehaviour {
 	public int damagePerShot = 10;
 	public float timeBetweenBullets = 0.15f;
 	public float range = 200f;
+	public ParticleSystem muzzleFlash;  
 
 	public Camera fpsCam;
 
@@ -12,8 +13,6 @@ public class Gun : MonoBehaviour {
 	Ray shootRay;                                   // A ray from the gun end forwards.
 	RaycastHit shootHit;                            // A raycast hit to get information about what was hit.
 	int shootableMask;                              // A layer mask so the raycast only hits things on the shootable layer.
-	ParticleSystem gunParticles;                    // Reference to the particle system.
-	LineRenderer gunLine;                           // Reference to the line renderer.
 	AudioSource gunAudio;                           // Reference to the audio source.
 	Light gunLight;                                 // Reference to the light component.
 	float effectsDisplayTime = 0.2f;                // The proportion of the timeBetweenBullets that the effects will display for.
@@ -25,8 +24,7 @@ public class Gun : MonoBehaviour {
 		shootableMask = LayerMask.GetMask ("Shootable");
 
 		// Set up the references.
-		gunParticles = GetComponent<ParticleSystem> ();
-		gunLine = GetComponent <LineRenderer> ();
+		//muzzleFlash = GetComponent<ParticleSystem> ();
 		gunAudio = GetComponent<AudioSource> ();
 		gunLight = GetComponent<Light> ();
 	}
@@ -55,8 +53,7 @@ public class Gun : MonoBehaviour {
 
 	public void DisableEffects ()
 	{
-		// Disable the line renderer and the light.
-		gunLine.enabled = false;
+		// Disable the light.
 		gunLight.enabled = false;
 	}
 
@@ -78,12 +75,8 @@ public class Gun : MonoBehaviour {
 		gunLight.enabled = true;
 
 		// Stop the particles from playing if they were, then start the particles.
-		gunParticles.Stop ();
-		gunParticles.Play ();
-
-		// Enable the line renderer and set it's first position to be the end of the gun.
-		gunLine.enabled = true;
-		gunLine.SetPosition (0, transform.position);
+		muzzleFlash.Stop ();
+		muzzleFlash.Play ();
 
 		// Set the shootRay so that it starts at the end of the gun and points forward from the barrel.
 		shootRay.origin = transform.position;
@@ -101,15 +94,6 @@ public class Gun : MonoBehaviour {
 				// ... the enemy should take damage.
 				enemyHealth.TakeDamage (damagePerShot, shootHit.point);
 			}
-
-			// Set the second position of the line renderer to the point the raycast hit.
-			gunLine.SetPosition (1, shootHit.point);
-		}
-		// If the raycast didn't hit anything on the shootable layer...
-		else
-		{
-			// ... set the second position of the line renderer to the fullest extent of the gun's range.
-			gunLine.SetPosition (1, shootRay.origin + shootRay.direction * range);
 		}
 	}
 }
