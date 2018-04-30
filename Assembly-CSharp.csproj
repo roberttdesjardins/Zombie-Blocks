@@ -51,8 +51,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Gun.cs" />
-     <Compile Include="Assets\GunScript.cs" />
      <Compile Include="Assets\SampleScenes\Menu\Scripts\MenuSceneLoader.cs" />
      <Compile Include="Assets\SampleScenes\Menu\Scripts\PauseMenu.cs" />
      <Compile Include="Assets\SampleScenes\Menu\Scripts\SceneAndURLLoader.cs" />
@@ -63,7 +61,10 @@
      <Compile Include="Assets\SampleScenes\Scripts\SlowMoButton.cs" />
      <Compile Include="Assets\Scripts\EnemyHealth.cs" />
      <Compile Include="Assets\Scripts\EnemyMovement.cs" />
+     <Compile Include="Assets\Scripts\Gun.cs" />
+     <Compile Include="Assets\Scripts\WeaponSwitching.cs" />
      <None Include="Assets\MentalDreamsAssets\SoldierSoundsPack\ReadMe!.txt" />
+     <None Include="Assets\Weapons Pack(LOW POLY)\Weapons Pack info.txt" />
      <None Include="Assets\SampleScenes\Shaders\Skybox-Procedural.shader" />
  <Reference Include="UnityEngine.UIAutomation">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UIAutomation/UnityEngine.UIAutomation.dll</HintPath>
