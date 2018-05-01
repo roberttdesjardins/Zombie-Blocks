@@ -7,6 +7,11 @@ public class Gun : MonoBehaviour {
 	public float range = 200f;
 	public ParticleSystem muzzleFlash; 
 	public GameObject impactEffect;
+	public float recoil = 0.0f;
+	public float maxRecoil_x = -20f;
+	public float maxRecoil_y = 20f;
+	public float recoilSpeed = 2f;
+
 	public float impactForce = 300f;
 
 	public Camera fpsCam;
@@ -26,30 +31,26 @@ public class Gun : MonoBehaviour {
 		shootableMask = LayerMask.GetMask ("Shootable");
 
 		// Set up the references.
-		//muzzleFlash = GetComponent<ParticleSystem> ();
 		gunAudio = GetComponent<AudioSource> ();
 		gunLight = GetComponent<Light> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
-		// Add the time since Update was last called to the timer.
 		timer += Time.deltaTime;
 
 		// If the Fire1 button is being press and it's time to fire...
 		if(Input.GetButton ("Fire1") && timer >= timeBetweenBullets)
 		{
-			// ... shoot the gun.
 			Shoot ();
 		}
 
 		// If the timer has exceeded the proportion of timeBetweenBullets that the effects should be displayed for...
 		if(timer >= timeBetweenBullets * effectsDisplayTime)
 		{
-			// ... disable the effects.
 			DisableEffects ();
 		}
+		recoiling ();
 		
 	}
 
@@ -58,12 +59,6 @@ public class Gun : MonoBehaviour {
 		// Disable the light.
 		gunLight.enabled = false;
 	}
-
-//	void Shoot() {
-//		if (Physics.Raycast (fpsCam.transform.position, fpsCam.transform.forward, out shootHit, range)) {
-//			Debug.Log (shootHit.transform.name);
-//		}
-//	}
 
 	void Shoot ()
 	{
@@ -90,10 +85,8 @@ public class Gun : MonoBehaviour {
 			// Try and find an EnemyHealth script on the gameobject hit.
 			EnemyHealth enemyHealth = shootHit.collider.GetComponent <EnemyHealth> ();
 
-			// If the EnemyHealth component exist...
 			if(enemyHealth != null)
 			{
-				// ... the enemy should take damage.
 				enemyHealth.TakeDamage (damagePerShot, shootHit.point);
 			}
 
@@ -105,5 +98,12 @@ public class Gun : MonoBehaviour {
 			GameObject impactGameObject = Instantiate (impactEffect, shootHit.point, Quaternion.LookRotation(shootHit.normal));
 			Destroy (impactGameObject, 2f);
 		}
+
+		// TESTING RECOIL]
+		recoil += 30;
+	}
+
+	void recoiling ()
+	{
 	}
 }

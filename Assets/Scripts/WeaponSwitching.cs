@@ -19,12 +19,23 @@ public class WeaponSwitching : MonoBehaviour {
 			} else {
 				selectedWeapon++;
 			}
-		} else if (Input.GetAxis ("Mouse ScrollWheel") < 0f) {
+		}
+		if (Input.GetAxis ("Mouse ScrollWheel") < 0f) {
 			if (selectedWeapon <= 0) {
 				selectedWeapon = transform.childCount - 1;
 			} else {
 				selectedWeapon--;
 			}
+		}
+
+		if (Input.GetKeyDown (KeyCode.Alpha1)) {
+			selectedWeapon = 0;
+		}
+		if (Input.GetKeyDown (KeyCode.Alpha2)) {
+			selectedWeapon = 1;
+		}
+		if (Input.GetKeyDown (KeyCode.Alpha3)) {
+			selectedWeapon = 2;
 		}
 
 		if (previousSelectedWeapon != selectedWeapon) {

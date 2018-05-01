@@ -62,6 +62,7 @@
      <Compile Include="Assets\Scripts\EnemyHealth.cs" />
      <Compile Include="Assets\Scripts\EnemyMovement.cs" />
      <Compile Include="Assets\Scripts\Gun.cs" />
+     <Compile Include="Assets\Scripts\Recoil.cs" />
      <Compile Include="Assets\Scripts\WeaponSwitching.cs" />
      <None Include="Assets\MentalDreamsAssets\SoldierSoundsPack\ReadMe!.txt" />
      <None Include="Assets\Weapons Pack(LOW POLY)\Weapons Pack info.txt" />
